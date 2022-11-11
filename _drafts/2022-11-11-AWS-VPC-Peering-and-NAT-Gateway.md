@@ -32,11 +32,80 @@ And when your subnet is `/24`, you're basically saying that 192.168.54 will neve
 
 ### Background
 
-What VPCs are and why we need them
+What VPCs are and why we need them.
 
-### VPC Setup
+Amazon VPC it enables you to launch AWS resource into Virtual Network that you have created. 
 
-## Resources
+It is similar to running your own data centre while utilising AWS scalable infrastructure.
+
+Setting up Amazon VPCs is kind of tricky so follow these steps carefully.
+
+### **VPC Setup**
+
+In this step we will be creating VPC, Subnet, Route Table, and Internet Gateway one by one.
+
+### **VPC**
+
+Goto Services Search for VPC :
+
+Select VPC
+
+1. VPC >> your VPC >> Create VPC
+2. Resources to create >> Select VPC only
+3. Name tag >> "finance_vpc"
+4. IPv4 CIDR block >> "10.0.0.0/16"
+5. Tenancy >> default
+6. Click Create VPC
+
+We have created our VPC.
+
+Next task is to Create a Subnet for our VPC.  
+
+### **Subnet**
+
+Select Subnet
+
+1. In VPC ID Select your VPC
+2. Subnet Name >> "finance_Public_subnet"
+3. Availability Zone >> ap-south-1a
+4. IPv4 CIDR block >> 10.0.1.0/24
+5. Click Create Subnet
+
+### **Route Table**
+
+Select Route Table
+
+1. Route Table Name >> "finance_public_route_table"
+2. Select your VPC ID
+3. Click Create Route Table
+
+### **Internet Gateway**
+
+Select Internet Gateway
+
+1. Internet Gateway Name >> "finance_internet_gateway"
+2. Click Create Internet Gateway
+3. Select your Internet Gateway >> Actions >> Attach to VPC
+4. Available VPCs >> Select your VPC >> Attach Internet Gateway
+
+The Following Step is to link our Subnet and Route Table
+
+Goto Route Table
+
+1. Select Subnet associations --> Edit Subnet associations
+2. Available Subnets >> Select your Subnet
+3. Save associations
+
+Back to Route table
+
+1. Select Routes --> Edit Routes
+2. Destination >> 0.0.0.0/0
+3. Target >> Select Internet Gateway
+4. Save changes
+
+We have Created our VPC successfully.
+
+## **Resources**
 
 1. Subnetting Tutorial - [Subnetting](https://www.subnetting.net/Tutorial.aspx)
 2. CIDR Blocks/Notation - [Wikipedia](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation)
